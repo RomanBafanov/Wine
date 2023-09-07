@@ -5,16 +5,6 @@ from http.server import HTTPServer, SimpleHTTPRequestHandler
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 
-# wines = []
-#
-# excel_data_df = pandas.read_excel(io='wine.xlsx')
-# count = len(excel_data_df.to_dict()['Название'])
-# for number in range(count):
-#     next_wine = {}
-#     for name, meaning in excel_data_df.to_dict().items():
-#         next_wine[name] = meaning[number]
-#     wines.append(next_wine)
-
 excel_data_df = pandas.read_excel(io='wine3.xlsx')
 wine_table = excel_data_df.to_dict()
 categoryes = wine_table['Категория']
