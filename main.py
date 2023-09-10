@@ -5,7 +5,7 @@ from http.server import HTTPServer, SimpleHTTPRequestHandler
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 
-excel_data_df = pandas.read_excel(io='wine3.xlsx')
+excel_data_df = pandas.read_excel(io='wine_store.xlsx')
 wine_table = excel_data_df.to_dict()
 categoryes = wine_table['Категория']
 
