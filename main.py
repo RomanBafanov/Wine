@@ -1,3 +1,5 @@
+import os
+import argparse
 import collections
 import datetime
 import pandas
@@ -35,24 +37,13 @@ def generate_correct_date():
     return year
 
 
-def main():
-    excel_data_df = pandas.read_excel(io='wine_store.xlsx')
-    wine_table = excel_data_df.to_dict()
-    categoryes = wine_table['Категория']
-
-    drinks_for_website = collections.defaultdict(list)
-    for name in categoryes:
-        next_drink = formation_information_wine(wine_table, name, categoryes)
-        drinks_for_website[categoryes[name]].append(next_drink)
-
+def launch_website(year, drinks_for_website):
     env = Environment(
         loader=FileSystemLoader('.'),
         autoescape=select_autoescape(['html', 'xml'])
     )
 
     template = env.get_template('template.html')
-
-    year = generate_correct_date()
 
     rendered_page = template.render(
         year=year,
@@ -64,6 +55,29 @@ def main():
 
     server = HTTPServer(('0.0.0.0', 8000), SimpleHTTPRequestHandler)
     server.serve_forever()
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description='Сайт магазина авторского вина "Новое русское вино".'
+                    'Для запуска вам понадобится файл с ассортиментом вина:'
+                    'Наберите команду python main.py Файл с ассортиментом.'
+                    'Если вы не укажете файл, то будет выбран файл-пример из проекта.')
+    parser.add_argument('excel_file', nargs='?', default='wine_store.xlsx', help='Файл с ассортиментом')
+    args = parser.parse_args()
+    wine_store = os.path.abspath(args.excel_file)
+    excel_data_df = pandas.read_excel(io=wine_store)
+    wine_table = excel_data_df.to_dict()
+    categoryes = wine_table['Категория']
+
+    drinks_for_website = collections.defaultdict(list)
+    for name in categoryes:
+        next_drink = formation_information_wine(wine_table, name, categoryes)
+        drinks_for_website[categoryes[name]].append(next_drink)
+
+    year = generate_correct_date()
+
+    launch_website(year, drinks_for_website)
 
 
 if __name__ == '__main__':
