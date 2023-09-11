@@ -7,6 +7,9 @@ from http.server import HTTPServer, SimpleHTTPRequestHandler
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 
+YEAR_OF_FOUNDATION = 1920
+
+
 def formation_information_wine(wine_table, name, category):
     drink = {}
     drink['Категория'] = category[name]
@@ -21,7 +24,7 @@ def formation_information_wine(wine_table, name, category):
 
 def generate_correct_date():
     now_year = datetime.datetime.now().year
-    count_years = now_year - 1920
+    count_years = now_year - YEAR_OF_FOUNDATION
     last_digit = count_years % 10
     last_two_digits = count_years % 100
 
