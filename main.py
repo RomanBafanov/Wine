@@ -22,7 +22,7 @@ def formation_information_wine(wine_table, name, category):
     return drink
 
 
-def generate_correct_date():
+def generate_how_old_the_company():
     now_year = datetime.datetime.now().year
     count_years = now_year - YEAR_OF_FOUNDATION
     last_digit = count_years % 10
@@ -78,7 +78,7 @@ def main():
         next_drink = formation_information_wine(wine_table, name, categories)
         drinks_for_website[categories[name]].append(next_drink)
 
-    year = generate_correct_date()
+    year = generate_how_old_the_company()
 
     launch_website(year, drinks_for_website)
 
