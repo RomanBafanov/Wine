@@ -68,12 +68,12 @@ def main():
     wine_store = os.path.abspath(args.excel_file)
     excel_data_df = pandas.read_excel(io=wine_store)
     wine_table = excel_data_df.to_dict()
-    categoryes = wine_table['Категория']
+    categories = wine_table['Категория']
 
     drinks_for_website = collections.defaultdict(list)
-    for name in categoryes:
-        next_drink = formation_information_wine(wine_table, name, categoryes)
-        drinks_for_website[categoryes[name]].append(next_drink)
+    for name in categories:
+        next_drink = formation_information_wine(wine_table, name, categories)
+        drinks_for_website[categories[name]].append(next_drink)
 
     year = generate_correct_date()
 
