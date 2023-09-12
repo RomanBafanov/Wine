@@ -78,9 +78,9 @@ def main():
         next_drink = formation_information_wine(wine_table, name, categories)
         drinks_for_website[categories[name]].append(next_drink)
 
-    year = generate_how_old_the_company()
+    years_of_company = generate_how_old_the_company()
 
-    launch_website(year, drinks_for_website)
+    launch_website(years_of_company, drinks_for_website)
 
 
 if __name__ == '__main__':
