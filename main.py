@@ -7,7 +7,7 @@ from http.server import HTTPServer, SimpleHTTPRequestHandler
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 
-YEAR_OF_FOUNDATION = 1920
+FOUNDATION_YEAR = 1920
 
 
 def formation_information_wine(wine_table, name, category):
@@ -24,7 +24,7 @@ def formation_information_wine(wine_table, name, category):
 
 def generate_how_old_the_company():
     now_year = datetime.datetime.now().year
-    count_years = now_year - YEAR_OF_FOUNDATION
+    count_years = now_year - FOUNDATION_YEAR
     last_digit = count_years % 10
     last_two_digits = count_years % 100
 
@@ -78,9 +78,9 @@ def main():
         next_drink = formation_information_wine(wine_table, name, categories)
         drinks_for_website[categories[name]].append(next_drink)
 
-    years_of_company = generate_how_old_the_company()
+    company_years = generate_how_old_the_company()
 
-    launch_website(years_of_company, drinks_for_website)
+    launch_website(company_years, drinks_for_website)
 
 
 if __name__ == '__main__':
